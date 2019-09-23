@@ -1,0 +1,42 @@
+.mone-1-1-1 {
+    max-width: 100%;
+}
+.mone-1-1-1 img {
+    max-width: 100%;
+}
+.mone-1-1-1 table {
+    margin: 0 auto;
+    max-width: 810px;
+}
+.mone--element-mone--inner--text {
+    color: rgb(119, 119, 119);
+    display: block;
+    font-family: "Roboto", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 25px;
+    text-align: left;
+}
+.mone--element-mone--inner--close {
+    display: none;
+}
+.mone--gate-sides .mone--element-mone--inner--text {
+    display: none;
+}
+.mone--gate-sides .mone--element-mone--inner--close {
+    display: none;
+}
+.mone-container-wrapper {
+    width: 100%;
+}
+body {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+}
+.container {
+    margin: 0 auto;
+}
+.top-header {
+    z-index: 52;
+}
