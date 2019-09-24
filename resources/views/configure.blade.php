@@ -3,6 +3,9 @@
 @section('content')
     <div class="photos configure-page">
         <form method="post" class="upload" enctype="multipart/form-data">
+
+            {{ csrf_field() }}
+
             <a href="{{ str_replace('http://', 'https://', URL::Route('report')) }}" target="_blank" style="padding-bottom: 20px; color: #000; display: block; width: 100%; text-align: center; float: left;">Report zúčastněných</a>
             <a href="{{ str_replace('http://', 'https://', URL::Route('photoReport')) }}" target="_blank" style="padding-bottom: 20px; color: #000; display: block; width: 100%; text-align: center; float: left;">Report vítězů</a>
 
@@ -11,6 +14,7 @@
                     {{ $errors->first() }}
                 </div>
             @endif
+
             <label class="label-full">Datum průběhu od:</label>
             <input type="text" class="datetimepicker" name="date_from" value="{{ App\Config::first()->date_from }}" placeholder="Soutěž probíha od (YYYY-MM-DD HH:MM)" />
 
@@ -61,30 +65,6 @@
             <label class="label-full" style="float: none; clear:both;">Text po skončení:</label>
             <div style="clear: both; margin-bottom: 2rem">
                 <textarea style="width: 100%; height: 100px;" name="description3">{{ App\Config::first()->description3 }}</textarea>
-            </div>
-
-            <label class="label-full">Video sticky playeru:</label>
-            <div style="clear: both; margin-bottom: 1rem">
-                <input style="width: 100%" name="sticky_video" value="{{ App\Config::first()->sticky_video }}" />
-            </div>
-
-            {{--<label class="label-full">Odkaz u gate na pozadí:</label>
-            <div style="clear: both; margin-bottom: 1rem">
-                <input style="width: 100%" name="gate_hyperlink" value="{{ App\Config::first()->gate_hyperlink }}" />
-            </div>--}}
-
-            <label class="label-full">Sticky článek 1</label>
-            <div style="clear: both; margin-bottom: 1rem" class="article-inputs">
-                <input style="width: 100%" name="article_1_title" value="{{ App\Config::first()->article_1_title }}" placeholder="Název" /><br />
-                <input style="width: 100%" name="article_1_link" value="{{ App\Config::first()->article_1_link }}" placeholder="Odkaz" /><br />
-                <input type="file" name="article-1-image">
-            </div>
-
-            <label class="label-full">Sticky článek 2</label>
-            <div style="clear: both; margin-bottom: 1rem" class="article-inputs">
-                <input style="width: 100%" name="article_2_title" value="{{ App\Config::first()->article_2_title }}" placeholder="Název" /><br />
-                <input style="width: 100%" name="article_2_link" value="{{ App\Config::first()->article_2_link }}" placeholder="Odkaz" /><br />
-                <input type="file" name="article-2-image">
             </div>
 
             <br />

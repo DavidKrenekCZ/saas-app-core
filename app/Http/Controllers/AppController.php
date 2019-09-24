@@ -209,26 +209,25 @@
         }
 
         public function postConfigure(Request $request) {
+
             if (Auth::user()->admin) {
 
-                Config::first()->update($request->only(['date_from', 'date_to', 'max_files', 'description1', 'description2', 'description3', 'textarea1', 'textarea2', 'sticky_video', 'gate_hyperlink', 'article_1_title', 'article_1_link', 'article_2_title', 'article_2_link']));
+                Config::first()->update($request->only(['date_from', 'date_to', 'max_files', 'description1', 'description2', 'description3', 'textarea1', 'textarea2']));
 
                 $files = [
-                    "background-image"  => "background",
                     "cover-image"       => "cover",
-                    "article-1-image"       => "article-1",
-                    "article-2-image"       => "article-2",
                     "terms-file"        => "terms-and-conditions"
                 ];
 
                 foreach ($files as $input => $name)
                     if ($file = $request->file($input)) {
                         // Resize cover image to max 900 px width
-                        if ($input == "cover-image")
+                        if ($input == "cover-image"){
                             Image::make($file)->resize(900, null, function ($constraint) {
                                 $constraint->aspectRatio();
                                 $constraint->upsize();
                             })->save(public_path('uploads/' . $name.".".$file->getClientOriginalExtension()));
+                        }
                         elseif ($input == "background-image")
                             Image::make($file)->save(public_path('uploads/' . $name.".".$file->getClientOriginalExtension()));
                         else
