@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableLikes extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
