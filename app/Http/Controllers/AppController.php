@@ -112,7 +112,7 @@
             $downloadFileName = "zucastneni_report";
             if (Auth::user()->admin) {
 
-                $data = User::get(['name', 'email', 'phone', 'facebook_user_id'])->toArray();
+                $data = User::get(['name', 'email', 'facebook_user_id'])->toArray();
 
                 $spreadsheet = new Spreadsheet();
                 $sheet       = $spreadsheet->getActiveSheet();
@@ -120,8 +120,7 @@
                 // Header
                 $sheet->setCellValue('A1', 'Jméno')
                     ->setCellValue('B1', 'E-mail')
-                    ->setCellValue('C1', 'Telefon')
-                    ->setCellValue('D1', 'ID uživatele');
+                    ->setCellValue('C1', 'ID uživatele');
 
                 $sheet->getStyle('A1:D1')->getFont()->setBold(true);
 
@@ -132,7 +131,6 @@
                 $sheet->getColumnDimension('A')->setAutoSize(true);
                 $sheet->getColumnDimension('B')->setAutoSize(true);
                 $sheet->getColumnDimension('C')->setAutoSize(true);
-                $sheet->getColumnDimension('D')->setAutoSize(true);
 
                 $writer = new Xlsx($spreadsheet);
                 $writer->save('uploads/reports/'.$serverFileName.'.xlsx');
@@ -156,11 +154,8 @@
                     $data = [
                         $photo->user->name,
                         $photo->user->email,
-                        $photo->user->phone,
                         $photo->likes_count.' ',
                         URL::to('uploads/photos/' . $photo->file),
-                        $photo->animal_name,
-                        $photo->animal_age,
                         $photo->name
                     ];
 
@@ -173,14 +168,11 @@
                 // Header
                 $sheet->setCellValue('A1', 'Jméno')
                     ->setCellValue('B1', 'E-mail')
-                    ->setCellValue('C1', 'Telefon')
-                    ->setCellValue('D1', 'Lajků')
-                    ->setCellValue('E1', 'Fotka')
-                    ->setCellValue('F1', 'Jméno zvířete')
-                    ->setCellValue('G1', 'Věk zvířete')
-                    ->setCellValue('H1', 'Popis fotky');
+                    ->setCellValue('C1', 'Lajků')
+                    ->setCellValue('D1', 'Fotka')
+                    ->setCellValue('E1', 'Popis fotky');
 
-                $sheet->getStyle('A1:H1')->getFont()->setBold(true);
+                $sheet->getStyle('A1:E1')->getFont()->setBold(true);
 
                 // Data
                 $sheet->fromArray($rows, null, "A2");
@@ -191,9 +183,6 @@
                 $sheet->getColumnDimension('C')->setWidth(11);
                 $sheet->getColumnDimension('D')->setAutoSize(true);
                 $sheet->getColumnDimension('E')->setAutoSize(true);
-                $sheet->getColumnDimension('F')->setAutoSize(true);
-                $sheet->getColumnDimension('G')->setAutoSize(true);
-                $sheet->getColumnDimension('H')->setAutoSize(true);
 
                 $writer = new Xlsx($spreadsheet);
                 $writer->save('uploads/reports/'.$serverFileName.'.xlsx');
