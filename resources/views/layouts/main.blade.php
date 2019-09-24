@@ -18,35 +18,35 @@
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js" integrity="sha256-C6CB9UYIS9UJeqinPHWTHVqh/E1uhG5Twh+Y5qFQmYg=" crossorigin="anonymous"></script>
     <script src="{{ secure_asset("lightbox/ekko-lightbox.min.js") }}"></script>
+    <style>
+        body.disabled .photos:before { content:'{!! App\Config::first()->description3 !!}'; } <!-- text po skončení -->
+    </style>
 </head>
 
-<body {{--@if (!App\Config::isActive()) class="disabled" @endif--}} >
+<body @if (!App\Config::isActive()) class="disabled" @endif >
 
 <script> var FacebookAppId = {{ env('FACEBOOK_APP_ID')}} </script>
 <script type="text/javascript" src="{{ secure_asset('js/facebook-sdk.js') }}"></script>
 
 <div id="fb-root"></div>
 
-<div class="mone-container-wrapper">
-    <ul class="top-header">
-        <li class="logo"><img src="{{ secure_asset('images/logo-small.svg') }}" alt="Logo Prima Mazlíček"></li>
-        <li><a href="{{ route('homepage') }}">Všechny fotky</a></li>
-        <li><a href="{{ route('winners') }}">TOP 20</a></li>
-        <li><a href="{{ route('upload') }}">Nahrát fotku</a></li>
-        @if(Auth::check())
-            <li><a href="{{ route('myPhotos') }}">Moje fotky</a></li>
-            <li><a href="{{ route('logout') }}">Odhlásit se</a></li>
-        @endif
-        @if(Auth::check() && Auth::user()->admin)
-            <li><a href="{{ route('configure') }}">Administrace</a></li>
-            <li><a href="{{ route('clearDb') }}" onclick="return confirm('Opravdu chcete smazat všechny data z aplikace?');">Obnovit databázi</a></li>
-        @endif
-    </ul>
-    <div class="container">
+<ul class="top-header">
+    <li><a href="{{ route('homepage') }}">Všechny fotky</a></li>
+    <li><a href="{{ route('winners') }}">TOP 20</a></li>
+    <li><a href="{{ route('upload') }}">Nahrát fotku</a></li>
+    @if(Auth::check())
+        <li><a href="{{ route('myPhotos') }}">Moje fotky</a></li>
+        <li><a href="{{ route('logout') }}">Odhlásit se</a></li>
+    @endif
+    @if(Auth::check() && Auth::user()->admin)
+        <li><a href="{{ route('configure') }}">Administrace</a></li>
+        <li><a href="{{ route('clearDb') }}" onclick="return confirm('Opravdu chcete smazat všechny data z aplikace?');">Obnovit databázi</a></li>
+    @endif
+</ul>
+<div class="container">
 
-        @yield('content')
+    @yield('content')
 
-    </div>
 </div>
 
 <footer>
