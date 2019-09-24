@@ -16,6 +16,7 @@ class CreateConfigTable extends Migration
             $table->increments('id');
             $table->string('date_from');
             $table->string('date_to');
+            $table->smallInteger('max_files');
             $table->timestamps();
         });
     }
