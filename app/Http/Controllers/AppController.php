@@ -463,7 +463,7 @@
                 DB::table('users')->where('admin', '=', 0)->delete();
                 DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-                return redirect()->action('AppController@getHomepage');
+                return redirect()->action([AppController::class, 'getHomepage']);
             }
         }
 
@@ -471,7 +471,7 @@
             if (Auth::user()->admin) {
                 $photo = Photo::find($id);
                 $photo->delete();
-                return redirect()->action('AppController@getHomepage');
+                return redirect()->action([AppController::class, 'getHomepage']);
             }
         }
     }
