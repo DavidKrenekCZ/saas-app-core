@@ -1,4 +1,4 @@
-<li class="{{ $class or '' }}" data-photo-id="{{ $photo->id }}">
+<li data-photo-id="{{ $photo->id }}">
     <div class="wrapp">
         @if(Auth::check())
             @if(Auth::user()->admin)

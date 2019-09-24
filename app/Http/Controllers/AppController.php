@@ -276,9 +276,8 @@
 
             $validation_rules = [
                 'name' => 'max:120',
-                'animal_name' => 'required',
-                'animal_age' => 'required',
-                'file' => 'required|image|max:'.$max_size.'|dimensions:min_width:800,min_height:600|max_rows:'.$max_rows,
+                'file' => 'required|image|max:'.$max_size.'|dimensions:min_width:800,min_height:600',
+                // 'file' => 'required|image|max:'.$max_size.'|dimensions:min_width:800,min_height:600|max_rows:'.$max_rows,
                 'phone' => 'required'
             ];
 
@@ -287,11 +286,9 @@
                 'file.required' => 'Musíte vybrat fotku, kterou chcete do soutěže poslat.',
                 'file.image' => 'Nahrávaný soubor není fotografie.',
                 'file.dimensions' => 'Fotografie musí být minimálně 800px široká a 600px vysoká',
-                'file.max_rows' => 'Můžete nahrát maximálně '.$max_files.' ' .$max_files_text,
+                // 'file.max_rows' => 'Můžete nahrát maximálně '.$max_files.' ' .$max_files_text,
                 'file.max' => 'Maximální povolená velikost obrázku je '.($max_size/1000).' MB',
                 'phone.required' => 'Musíte zadat Vaše telefonní číslo, na které se máme ozvat v případě výhry',
-                'animal_name.required' => 'Vyplňte prosím jméno zvířete.',
-                'animal_age.required' => 'Vyplňte prosím věk zvířete.',
             ];
 
             $validator = Validator::make(Input::all(), $validation_rules, $messages_rules);
@@ -311,8 +308,6 @@
             $new_photo = Photo::create([
                 'user_id' => Auth::user()->id,
                 'name' => $request->get('name'),
-                'animal_name' => $request->get('animal_name'),
-                'animal_age' => $request->get('animal_age'),
                 'file' => $filename
             ]);
 

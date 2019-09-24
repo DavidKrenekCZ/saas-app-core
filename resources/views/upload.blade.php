@@ -4,6 +4,8 @@
     <div class="photos">
         <form method="post" class="upload photo-form" enctype="multipart/form-data">
 
+            {{ csrf_field() }}
+
             @if(count($errors) > 0)
                 <div class="alert alert-danger">
                     {{ $errors->first() }}
@@ -14,8 +16,6 @@
             <label for="file" id="file"><i class="fa fa-upload"><span>Vybrat fotku</span></i></label>
             <div class="photo"></div>
 
-                <input type="text" name="animal_name" placeholder="* Jméno zvířete" value="{{ old('animal_name') }}" maxlength="50" />
-                <input type="text" name="animal_age" placeholder="* Věk zvířete" value="{{ old('animal_age') }}" maxlength="3" />
                 <input type="text" name="name" placeholder="** Popis fotky" value="{{ old('name') }}" maxlength="120" id="photo_desc" />
                 <input type="text" name="phone" placeholder="* Vaše telefonní číslo, kam Vás máme kontaktovat v případě výhry" value="{{ old('phone') }}" />
 
