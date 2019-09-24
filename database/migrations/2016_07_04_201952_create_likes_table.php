@@ -18,8 +18,8 @@ class CreateLikesTable extends Migration
             $table->integer('photo_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('photo_id')->references('id')->on('photos');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('photo_id')->references('id')->on('photos')->onDelete('cascade');
         });
     }
 
