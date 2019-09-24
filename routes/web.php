@@ -35,8 +35,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/delete-image/{id}', ['as' => 'delete-image', 'uses' => 'AppController@deleteImage']);
 });
 
-Route::auth();
-Route::get('/registrace', ['as' => 'register', 'uses' => 'Auth\AuthController@showRegistrationForm']);
-Route::get('/prihlaseni', ['as' => 'login-page', 'uses' => 'Auth\AuthController@showLoginForm']);
-Route::get('/odhlaseni', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
-Route::get('/login', ['as' => 'login', 'uses' => 'AppController@getLogin']);
+// Auth routes
+Auth::routes(['verify' => false]); // register all auth routes
+
+Route::get('login', ['as' => 'login', 'uses' => 'AppController@getLogin']); // FB login
+
+Route::get('prihlaseni', 'Auth\LoginController@showLoginForm')->name('login-page'); // e-mail login
+Route::get('odhlaseni', 'Auth\LoginController@logout')->name('logout');
+Route::get('registrace', 'Auth\RegisterController@showRegistrationForm')->name('register');

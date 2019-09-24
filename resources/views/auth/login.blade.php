@@ -7,8 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Přihlášení</div>
                 <div class="panel-body">
-                    <h2>Přihlašování e-mailem bylo v rámci soutěže zrušeno. Je možné se přihlásit pomocí Facebook účtu.</h2>
-                    {{--<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -47,7 +46,7 @@
                                 <a class="btn btn-link" href="{{ route("register") }}">Zaregistrujte se</a>
                             </div>
                         </div>
-                    </form>--}}
+                    </form>
                 </div>
             </div>
         </div>

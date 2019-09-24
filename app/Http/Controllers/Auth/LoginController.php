@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +37,45 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        $request->session()->flash('message', 'Byl jste úspěšně přihlášen, můžete se zapojit do soutěže.');
+        return redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateLogin(Request $request)
+    {
+        $messages = array(
+            'email.required' => 'E-mail musí být vyplněn.',
+            'password.required' => 'Heslo musí být vyplněno.',
+        );
+
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ], $messages);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/')->with('message', 'Byl jste úspěšně odhlášena.');
     }
 }
